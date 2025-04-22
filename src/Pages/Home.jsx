@@ -4,6 +4,7 @@ import Layout from "../Layout/Layout";
 
 
 export default function HomePage() {
+  // console.log(import.meta.env);
     return (
       <Layout>
       <div className="min-h-[70vh] bg-gradient-to-br from-yellow-100 via-red-100 to-pink-100 p-6">
