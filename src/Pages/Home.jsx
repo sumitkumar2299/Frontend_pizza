@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import pizza from '../assets/Images/pizza.png'
 import Layout from "../Layout/Layout";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getAllProducts } from "../Redux/Slices/ProductSlice";
 
 
 export default function HomePage() {
+  const dispatch = useDispatch();
+  const {productsData} = useSelector((state)=>state.product);
+  useEffect(()=>{
+    // this will call when the function mounts 
+    dispatch(getAllProducts());
+
+  },[])
   // console.log(import.meta.env);
     return (
       <Layout>
@@ -31,6 +41,7 @@ export default function HomePage() {
           </div>
         </section>
       </div>
+      {productsData.map((product) => <div key={product._id}>{product.productName}</div>)}
       </Layout>
     );
   }

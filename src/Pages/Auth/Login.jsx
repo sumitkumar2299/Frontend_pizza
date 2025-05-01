@@ -2,6 +2,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import LoginPresentation from "./LogInPresentation";
+import { login } from "../../Redux/Slices/AuthSlice";
 
 function Login(){
     const dispatch = useDispatch();
@@ -32,18 +34,15 @@ function Login(){
             toast.error("invalid email address")
             return;
         }
+
+        const apiResponse = await dispatch(login(loginData));
+        console.log('Api response',apiResponse);
+        if(apiResponse.payload.data.success){
+            navigate('/')
+        }
     }
     return (
-       <>
-       </>
-        
-        
-                   
-
-                    
-                    
-
-                 
+       <LoginPresentation handleFormSubmit={handleFormSubmit} handleUserInput={handleUserInput}/>      
     )
 }
 export default Login;
